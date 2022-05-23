@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class LearnData : MonoBehaviour
 {
-    int hp;
-    int lv;
-    float exp;
-    string playerName;
-    bool hasCureSkill;
+    long hp = 1000000000000;
+    int lv = 99;
+    float exp = 3.14159f;
+    string playerName = "KoNoDioDa";
+    bool hasCureSkill = true;
 }
