@@ -1,26 +1,92 @@
 fileFormatVersion: 2
-guid: b20cb9cb9197fb64a830cea6c0550d0e
+guid: 1f499d0eded7a4245b0c36149a43da4f
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
   - first:
       1: 100000
+    second: Body
+  - first:
+      1: 100002
+    second: BottomEyeCover
+  - first:
+      1: 100004
+    second: Crown
+  - first:
+      1: 100006
+    second: EyeBall
+  - first:
+      1: 100008
+    second: EyeCTRL
+  - first:
+      1: 100010
+    second: Head
+  - first:
+      1: 100012
+    second: Side_L
+  - first:
+      1: 100014
+    second: Side_R
+  - first:
+      1: 100016
+    second: Slime
+  - first:
+      1: 100018
     second: //RootNode
+  - first:
+      1: 100020
+    second: Spine01
+  - first:
+      1: 100022
+    second: UpperEyeCover
   - first:
       4: 400000
+    second: Body
+  - first:
+      4: 400002
+    second: BottomEyeCover
+  - first:
+      4: 400004
+    second: Crown
+  - first:
+      4: 400006
+    second: EyeBall
+  - first:
+      4: 400008
+    second: EyeCTRL
+  - first:
+      4: 400010
+    second: Head
+  - first:
+      4: 400012
+    second: Side_L
+  - first:
+      4: 400014
+    second: Side_R
+  - first:
+      4: 400016
+    second: Slime
+  - first:
+      4: 400018
     second: //RootNode
   - first:
-      23: 2300000
-    second: //RootNode
+      4: 400020
+    second: Spine01
   - first:
-      33: 3300000
-    second: //RootNode
+      4: 400022
+    second: UpperEyeCover
   - first:
       43: 4300000
-    second: Shield1
+    second: Slime
   - first:
-      43: 4300002
-    second: Shield4
+      74: 7400000
+    second: Take 001
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Slime
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -53,7 +119,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 3
+    globalScale: 1.5
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -89,12 +155,12 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 4
+    normalCalculationMode: 0
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
@@ -106,16 +172,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.03
+    globalScale: 0.015
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
