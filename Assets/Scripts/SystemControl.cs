@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 namespace KZ
 {
@@ -9,11 +10,7 @@ namespace KZ
     /// </summary>
     public class SystemControl : MonoBehaviour
     {
-        private void Update()
-        {
-            ShootMarble();
-        }
-
+        
         #region 資料
         //GameObject 遊戲物件
         //存放階層面板內或專案內的物件
@@ -35,8 +32,22 @@ namespace KZ
         public float speedMarble = 1000;
         [Header("彈珠發射間隔"), Range(0, 2)]
         public float intervalMarble = 0.5f;
+        /// <summary>
+        /// 能否發射彈珠
+        /// </summary>
+        public bool canShootMarble = true;
+        [Header("彈珠數量")]
+        public TextMeshProUGUI textMarbleCount;
 
-        public Animator ani;
+        private Animator ani;
+        /// <summary>
+        /// 滑鼠座標攝影機
+        /// </summary>
+        private Camera cameraMouse;
+        /// <summary>
+        /// 座標轉換物件
+        /// </summary>
+        private Transform traMouse;
         #endregion
 
         #region 事件
@@ -44,7 +55,21 @@ namespace KZ
         private void Awake()
         {
             ani = GetComponent<Animator>();
+
+            textMarbleCount.text = "x" + canShootMarbleTotla;
+
+            cameraMouse = GameObject.Find("滑鼠座標攝影機").GetComponent<Camera>();
+
+            //traMouse = GameObject.Find("座標轉換物件").GetComponent<Transform>();
+            traMouse = GameObject.Find("座標轉換物件").transform;
         }
+
+        private void Update()
+        {
+            ShootMarble();
+            TurnCharacter();
+        }
+
         #endregion
 
         #region 方法
@@ -53,13 +78,32 @@ namespace KZ
         /// </summary>
         private void TurnCharacter()
         {
+            if (!canShootMarble) return;
 
+            // 1. 滑鼠座標
+            Vector3 posMouse = Input.mousePosition;
+            //print("<color = yellow>滑鼠座標 : " + posMouse + "</color>");
+            //跟攝影機的Y軸一樣
+            posMouse.z = 29;
+
+            // 2. 滑鼠座標轉為世界座標
+            Vector3 pos = cameraMouse.ScreenToWorldPoint(posMouse);
+            //將轉換完的世界座標高度設定為角色的高度
+            pos.y = 0.5f;
+            // 3. 世界座標給實體物件
+            traMouse.position = pos;
+
+            // 此物件的變形.面向(座標轉換後實體物件)
+            transform.LookAt(traMouse);
         }
         /// <summary>
         /// 發射彈珠，根據總數發射彈珠
         /// </summary>
         private void ShootMarble()
         {
+            //如果 不能發射彈珠 就跳出
+            if (!canShootMarble) return;
+
             //按下 滑鼠左鍵 顯示 箭頭
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -69,14 +113,21 @@ namespace KZ
             //放開滑鼠左鍵 放開並發射彈珠
             else if (Input.GetKeyUp(KeyCode.Mouse0))
             {
+                //不能發射彈珠
+                canShootMarble = false;
+
                 //print("放開左鍵!");
                 arrow.SetActive(false);
                 StartCoroutine(SpawnMarble());
+
+                
             }
         }
 
         private IEnumerator SpawnMarble()
         {
+            int total = canShootMarbleTotla;
+
             for (int i = 0; i < canShootMarbleTotla; i++)
             {
                 ani.SetTrigger(parAttack);
@@ -89,6 +140,10 @@ namespace KZ
                 tempMarble.GetComponent<Rigidbody>().AddForce(transform.forward * speedMarble);
                 //暫存彈珠 取得剛體元件 添加推力 (角色.前方 * 速度)
                 //transform.forward 角色的前方
+
+                total--;
+                if (total > 0) textMarbleCount.text = "x" + total;
+                else if (total <= 0) textMarbleCount.text = "";
 
                 yield return new WaitForSeconds(intervalMarble);
             }
