@@ -62,6 +62,9 @@ namespace KZ
 
             //traMouse = GameObject.Find("座標轉換物件").GetComponent<Transform>();
             traMouse = GameObject.Find("座標轉換物件").transform;
+
+            // 物理 忽略屠城碰撞(圖層1，圖層2)
+            Physics.IgnoreLayerCollision(3, 3);
         }
 
         private void Update()
