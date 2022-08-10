@@ -33,9 +33,14 @@ namespace KZ
 
         private void GetDamage()
         {
-            hp -= 50;
+            float getDamage = 50;
+            hp -= getDamage;
             textHP.text = hp.ToString();
             imgHP.fillAmount = hp / dataEnemy.hp;
+            
+            Vector3 pos = transform.position + Vector3.up;
+            SystemDamage tempDamage = Instantiate(goDamage, pos, Quaternion.Euler(45, 0, 0)).GetComponent<SystemDamage>();
+            tempDamage.damage = getDamage;
 
             if (hp <= 0) Dath();
         }
