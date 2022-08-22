@@ -19,6 +19,10 @@ namespace KZ
         private DataEnemy dataEnemy;
         private float hp;
 
+        [SerializeField, Header("敵人動畫控制器")]
+        private Animator aniEnemy;
+        private string parDamage = "觸發受傷";
+
         private void Awake()
         {
             hp = dataEnemy.hp;
@@ -37,6 +41,7 @@ namespace KZ
             hp -= getDamage;
             textHP.text = hp.ToString();
             imgHP.fillAmount = hp / dataEnemy.hp;
+            aniEnemy.SetTrigger(parDamage);
             
             Vector3 pos = transform.position + Vector3.up;
             SystemDamage tempDamage = Instantiate(goDamage, pos, Quaternion.Euler(45, 0, 0)).GetComponent<SystemDamage>();

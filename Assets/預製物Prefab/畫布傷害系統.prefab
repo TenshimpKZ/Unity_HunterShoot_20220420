@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 3164893628759833828}
   - component: {fileID: 3164893628759833829}
   - component: {fileID: 3164893628759833826}
+  - component: {fileID: 521491829}
   m_Layer: 5
   m_Name: "\u756B\u5E03\u50B7\u5BB3\u7CFB\u7D71"
   m_TagString: Untagged
@@ -172,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 4.01}
+  m_AnchoredPosition: {x: 0, y: 4.01001}
   m_SizeDelta: {x: 1500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3164893628759833828
@@ -236,3 +237,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &521491829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3164893628759833827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecec795a255a2e742922f72f47dd89f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 210
+  colorGratherThan100: {r: 250, g: 250, b: 250, a: 1}
+  colorGratherThan200: {r: 250, g: 0, b: 0, a: 1}
+  interval: 0.025
