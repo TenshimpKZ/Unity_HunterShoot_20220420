@@ -23,10 +23,13 @@ namespace KZ
         private Animator aniEnemy;
         private string parDamage = "觸發受傷";
 
+        private SystemSpawn systemSpawn;
+
         private void Awake()
         {
             hp = dataEnemy.hp;
             textHP.text = hp.ToString();
+            systemSpawn = GameObject.Find("怪物生成系統").GetComponent<SystemSpawn>();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -52,7 +55,9 @@ namespace KZ
 
         private void Dath()
         {
-            print("死亡");
+            //print("死亡");
+            Destroy(gameObject);
+            systemSpawn.totalCountEnemyLive--;
         }
     }
 }

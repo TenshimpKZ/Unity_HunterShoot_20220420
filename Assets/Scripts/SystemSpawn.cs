@@ -22,6 +22,9 @@ namespace KZ
 
         [Header("格子 彈珠"), SerializeField]
         private GameObject goMarbal;
+
+        //怪物與可以吃的彈珠存活總數
+        public int totalCountEnemyLive;
         #endregion
 
         #region 事件
@@ -36,7 +39,7 @@ namespace KZ
         /// <summary>
         /// 生成隨機敵人
         /// </summary>
-        private void SpawnRandomEnemy()
+        public void SpawnRandomEnemy()
         {
             int min = 2;
             int max = traSecondPlace.Length;
@@ -75,8 +78,10 @@ namespace KZ
                     //生成怪物
                     Instantiate(goEnemys[randomIndex], listSecondPlace[i].position, Quaternion.identity);
                 }
-                
-                
+
+                totalCountEnemyLive++;
+                print("怪物與彈珠數量 : " + totalCountEnemyLive);
+
             }
         }
         #endregion

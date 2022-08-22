@@ -32,12 +32,14 @@ namespace KZ
         public float speedMarble = 1000;
         [Header("彈珠發射間隔"), Range(0, 2)]
         public float intervalMarble = 0.5f;
+        
+        [Header("彈珠數量")]
+        public TextMeshProUGUI textMarbleCount;
+
         /// <summary>
         /// 能否發射彈珠
         /// </summary>
         public bool canShootMarble = true;
-        [Header("彈珠數量")]
-        public TextMeshProUGUI textMarbleCount;
 
         private Animator ani;
         /// <summary>
