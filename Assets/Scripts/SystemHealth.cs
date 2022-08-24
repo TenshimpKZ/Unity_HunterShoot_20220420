@@ -58,6 +58,23 @@ namespace KZ
             //print("¦º¤`");
             Destroy(gameObject);
             systemSpawn.totalCountEnemyLive--;
+
+            DropCoin();
+        }
+
+        private void DropCoin()
+        {
+            int range = Random.Range(dataEnemy.v2CoinRange.x, dataEnemy.v2CoinRange.y);
+
+            for (int i = 0; i < range; i++)
+            {
+                float x = Random.Range(1, -1);
+                float y = Random.Range(1, -1);
+
+                Instantiate(dataEnemy.goCoin,
+                            transform.position + new Vector3(x, 2.5f, y),
+                            Quaternion.Euler(90, 0, 180));
+            }
         }
     }
 }
