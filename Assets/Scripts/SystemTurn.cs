@@ -18,6 +18,7 @@ namespace KZ
         //敵人回合
         public UnityEvent onTurnEnemy;
         private bool canSpawn = true;
+        private int countMarbleEat;
         #endregion
 
         private void Awake()
@@ -59,6 +60,15 @@ namespace KZ
             systemControl.canShootMarble = true;
             canSpawn = true;
             totalRecycleMarble = 0;
+
+            // 彈珠數量處裡
+            systemControl.canShootMarbleTotla += countMarbleEat;
+            countMarbleEat = 0;
+        }
+
+        public void MarbleEat()
+        {
+            countMarbleEat++;
         }
     }
 }

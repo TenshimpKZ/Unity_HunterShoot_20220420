@@ -9,6 +9,7 @@ namespace KZ
     /// </summary>
     public class SystemHealth : MonoBehaviour
     {
+        #region 資料
         [SerializeField, Header("畫布傷害物件")]
         private GameObject goDamage;
         [SerializeField, Header("圖片血量")]
@@ -25,6 +26,23 @@ namespace KZ
 
         private SystemSpawn systemSpawn;
 
+        [SerializeField, Header("碰到會受傷的物件名稱")]
+        private string nameHurtObject;
+
+        [Header("玩家接收傷害區域")]
+        [SerializeField]private Vector3 v3DamageSize;
+        [SerializeField]private Vector3 v3DamagePosition;
+
+        [SerializeField, Header("接收傷害的圖層")]
+        private LayerMask layerDamage;
+        #endregion
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = new Color(0.2f, 1, 0.2f, 0.5f);
+            Gizmos.DrawCube(v3DamagePosition, v3DamageSize);
+        }
+
         private void Awake()
         {
             hp = dataEnemy.hp;
@@ -32,10 +50,30 @@ namespace KZ
             systemSpawn = GameObject.Find("怪物生成系統").GetComponent<SystemSpawn>();
         }
 
+        private void Update()
+        {
+            CheckObjectInDamageArea();
+        }
+
+        // 檢查物件是否進入受傷區域
+        private void CheckObjectInDamageArea()
+        {
+            Collider[] hits = Physics.OverlapBox(
+                v3DamagePosition, v3DamageSize / 2,
+                Quaternion.identity, layerDamage);
+
+            if (hits.Length > 0)
+            {
+                GetDamage();
+                Destroy(hits[0].gameObject);
+            }
+        }
+
+        //碰撞事件
         private void OnCollisionEnter(Collision collision)
         {
             //print("碰撞到的物件 : " + collision.gameObject);
-            GetDamage();
+            if (collision.gameObject.name.Contains(nameHurtObject)) GetDamage();
         }
 
         private void GetDamage()

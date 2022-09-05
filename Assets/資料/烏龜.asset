@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3210d7e1c8748a448d7686d7a16b3a2, type: 3}
-  m_Name: "\u53F2\u840A\u59C6"
+  m_Name: "\u70CF\u9F9C"
   m_EditorClassIdentifier: 
-  hp: 1000
-  damage: 100
-  goCoin: {fileID: 6314136805784181107, guid: 70c15717d2aebff468b80701c9b153ae, type: 3}
-  v2CoinRange: {x: 1, y: 10}
+  hp: 1500
+  damage: 50
+  goCoin: {fileID: 1488123104121827023, guid: be012890da54c0848bdb81ffa308a151, type: 3}
+  v2CoinRange: {x: 3, y: 10}
