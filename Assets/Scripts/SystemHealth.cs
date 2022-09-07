@@ -24,8 +24,6 @@ namespace KZ
         private Animator aniEnemy;
         private string parDamage = "觸發受傷";
 
-        private SystemSpawn systemSpawn;
-
         [SerializeField, Header("碰到會受傷的物件名稱")]
         private string nameHurtObject;
 
@@ -35,6 +33,12 @@ namespace KZ
 
         [SerializeField, Header("接收傷害的圖層")]
         private LayerMask layerDamage;
+
+        [SerializeField, Header("是否為玩家")]
+        private bool isPlayer;
+
+        private SystemSpawn systemSpawn;
+        private SystemFinal systemFinal;
         #endregion
 
         private void OnDrawGizmos()
@@ -48,6 +52,7 @@ namespace KZ
             hp = dataEnemy.hp;
             textHP.text = hp.ToString();
             systemSpawn = GameObject.Find("怪物生成系統").GetComponent<SystemSpawn>();
+            systemFinal = FindObjectOfType<SystemFinal>();
         }
 
         private void Update()
@@ -64,7 +69,7 @@ namespace KZ
 
             if (hits.Length > 0)
             {
-                GetDamage();
+                GetDamage(hits[0].GetComponent<SystemAttack>().valueAttack);
                 Destroy(hits[0].gameObject);
             }
         }
@@ -73,12 +78,14 @@ namespace KZ
         private void OnCollisionEnter(Collision collision)
         {
             //print("碰撞到的物件 : " + collision.gameObject);
-            if (collision.gameObject.name.Contains(nameHurtObject)) GetDamage();
+            if (collision.gameObject.name.Contains(nameHurtObject)) 
+                GetDamage(collision.gameObject.GetComponent<SystemAttack>().valueAttack);
         }
 
-        private void GetDamage()
+        //受傷
+        private void GetDamage(float getDamage)
         {
-            float getDamage = 50;
+            
             hp -= getDamage;
             textHP.text = hp.ToString();
             imgHP.fillAmount = hp / dataEnemy.hp;
@@ -91,13 +98,16 @@ namespace KZ
             if (hp <= 0) Dath();
         }
 
+        //死亡
         private void Dath()
         {
-            //print("死亡");
-            Destroy(gameObject);
-            systemSpawn.totalCountEnemyLive--;
-
-            DropCoin();
+            if (isPlayer) systemFinal.ShowFinalAndUpdateSubTitle("挑戰關卡失敗...");
+            else
+            {
+                Destroy(gameObject);
+                systemSpawn.totalCountEnemyLive--;
+                DropCoin();
+            }
         }
 
         private void DropCoin()
