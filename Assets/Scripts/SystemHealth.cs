@@ -37,6 +37,12 @@ namespace KZ
         [SerializeField, Header("是否為玩家")]
         private bool isPlayer;
 
+        [SerializeField, Header("受傷音效")]
+        private AudioClip soundHurt;
+
+        [SerializeField, Header("死亡音效")]
+        private AudioClip soundDead;
+
         private SystemSpawn systemSpawn;
         private SystemFinal systemFinal;
         #endregion
@@ -95,12 +101,16 @@ namespace KZ
             SystemDamage tempDamage = Instantiate(goDamage, pos, Quaternion.Euler(45, 0, 0)).GetComponent<SystemDamage>();
             tempDamage.damage = getDamage;
 
-            if (hp <= 0) Dath();
+            SystemSound.instance.Playsound(soundHurt, new Vector2(0.7f, 1.2f));
+
+            if (hp <= 0) Datd();
         }
 
         //死亡
-        private void Dath()
+        private void Datd()
         {
+            SystemSound.instance.Playsound(soundDead, new Vector2(0.7f, 1.2f));
+
             if (isPlayer) systemFinal.ShowFinalAndUpdateSubTitle("挑戰關卡失敗...");
             else
             {

@@ -23,7 +23,7 @@ namespace KZ
         public GameObject marble;
         [Header("可發射的彈珠總數")]
         [Range(0, 100)]
-        public int canShootMarbleTotla = 15;
+        public int canShootMarbleTotla = 10;
         [Header("彈珠生成")]
         public Transform traSpawnPoint;
         [Header("攻擊參數名稱")]
@@ -35,6 +35,9 @@ namespace KZ
         
         [Header("彈珠數量")]
         public TextMeshProUGUI textMarbleCount;
+
+        [SerializeField, Header("發射彈珠音效")]
+        private AudioClip soundShoot;
 
         /// <summary>
         /// 能否發射彈珠
@@ -145,6 +148,9 @@ namespace KZ
                 tempMarble.GetComponent<Rigidbody>().AddForce(transform.forward * speedMarble);
                 //暫存彈珠 取得剛體元件 添加推力 (角色.前方 * 速度)
                 //transform.forward 角色的前方
+
+                //音效系統.靜態實體.播放音效(音效，音量範圍)
+                SystemSound.instance.Playsound(soundShoot, new Vector2(0.7f, 1.2f));
 
                 total--;
                 if (total > 0) textMarbleCount.text = "x" + total;
